@@ -1,4 +1,4 @@
-from read_config import ReadConfig
+from readconfig.read_config import ReadConfig
 import pyrfc
 import pandas as pd
 import re
