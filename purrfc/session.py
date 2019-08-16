@@ -6,7 +6,7 @@ import re
 
 class RfcConnection:
     def __init__(self):
-        self.config = ReadConfig(host="127.0.0.1")
+        self.config = ReadConfig(host="redisconfig")
         self.conn = None
         while self.conn is None:
             try:

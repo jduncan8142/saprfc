@@ -1,0 +1,5 @@
+https://github.com/SAP/PyRFC/releases/download/1.9.93/pyrfc-1.9.93-cp37-cp37m-win_amd64.whl; sys.platform == 'win32'
+https://github.com/SAP/PyRFC/releases/download/1.9.95/pyrfc-1.9.95-cp37-cp37m-linux_x86_64.whl; sys.platform == 'linux'
+readconfig>=0.0.6
+redis
+pandas
