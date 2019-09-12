@@ -12,7 +12,7 @@ with open("purrfc/README.md", "r") as fh:
 
 setuptools.setup(
     name="purrfc",
-    version="0.0.1",
+    version="0.0.2",
     author="Jason Duncan",
     author_email="jason.matthew.duncan@gmail.com",
     description="Wrapper for SAP RFC connector PyRFC",

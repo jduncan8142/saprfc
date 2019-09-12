@@ -16,7 +16,9 @@ class RfcConnection:
                     client=self.config.get("client"),
                     user=self.config.get("rfcuser")["username"],
                     passwd=self.config.get("rfcuser")["passwd"])
-            except pyrfc._exception.CommunicationError as e:
+            # except pyrfc._exception.CommunicationError as e:
+            #     continue
+            except pyrfc.CommunicationError:
                 continue
             except Exception as e:
                 raise Exception(str(e))
@@ -33,6 +35,22 @@ class RfcConnection:
 
     def th_wpinfo(self):
         return self.conn.call("TH_WPINFO")
+
+    def multi_replace(self, s, l, c, sc=None):
+        sc = " " if sc is None else sc
+        new_str = ""
+        r = None
+        tmp = s.split(sc)
+        for i in tmp:
+            if str(c) in str(i):
+                try:
+                    r = l.pop(0)
+                except:
+                    r = "&"
+                new_str = new_str + r + " "
+            else:
+                new_str = new_str + i + " "
+        return new_str
 
     def rfc_get_system_info(self):
         return self.conn.call("RFC_GET_SYSTEM_INFO")
@@ -73,7 +91,7 @@ class RfcConnection:
                          "AND MSGNR = '{2}'".format(Language, Msg["MSGID"], Msg["MSGNR"])
             message_text = self.db_query(q=code_query)
             r_list = [Msg["MSGV1"], Msg["MSGV2"], Msg["MSGV3"], Msg["MSGV4"]]
-            message_text = multi_replace(message_text[0][0], r_list, "&")
+            message_text = self.multi_replace(message_text[0][0], r_list, "&")
             return str("Error: " + Msg["MSGID"] + ":" + Msg["MSGNR"] + "  --> " + message_text)
 
     def db_query(self, q=None, max_rows=None, offset=None, df=False, headers=False, raw=False):
