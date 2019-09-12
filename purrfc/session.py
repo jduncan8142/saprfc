@@ -21,7 +21,7 @@ class RfcConnection:
             except pyrfc.CommunicationError:
                 continue
             except Exception as e:
-                raise Exception(str(e))
+                raise Exception(f"Unhandled Exception: {e}")
 
     def stfc_connection(self, requtext=None):
         requtext = "" if requtext is None else requtext
